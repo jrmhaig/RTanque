@@ -55,8 +55,11 @@ LONGDESC
   long_desc <<-LONGDESC
 Helper to set up an example configuration file
 LONGDESC
+  method_option :screen, aliases: '-s', default: nil, type: :string, :banner => 'viewing screen'
   def init
+    @screen = options[:screen] || 'silent'
     template('templates/settings.yml', 'settings.yml')
+    # TODO: Update Gemspec for screen, if necessary
   end
 
   desc "new_bot <bot_name>", "Creates a new bot"

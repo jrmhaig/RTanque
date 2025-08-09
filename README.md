@@ -9,6 +9,58 @@ how to use it.
 
 # RTanque [![Build Status](https://travis-ci.org/awilliams/RTanque.png?branch=dev)](https://travis-ci.org/awilliams/RTanque) [![CodeClimate](https://codeclimate.com/github/awilliams/RTanque.png)](https://codeclimate.com/github/awilliams/RTanque)
 
+## What is this?
+
+RTanque is a game for ( *Ruby* ) programmers. Players program the brain of a tank and then send their tank+brain into battle with other tanks. All tanks are otherwise equal.
+
+[Getting started guide](https://awilliams.github.io/posts/rtanque-getting-started/)
+
+Rules of the game are simple: Last bot standing wins. Gameplay is also pretty simple. Each tank has a **base**, **turret** and **radar**, each of which rotate independently. The base moves the tank, the turret has a gun mounted to it which can fire at other tanks, and the radar detects other tanks in its field of vision.
+
+Have fun competing against friends' tanks or the sample ones included. Maybe you'll start a small league at your local Ruby meetup. CLI provides easy way to download bots from gists.
+
+Sound difficult or time consuming? It's not! Check out the included sample tank [Seek&Destroy](sample_bots/seek_and_destroy.rb) (which is actually fairly difficult to beat with the keyboard controlled bot). Note that it clocks in at under 50 LOC.
+
+This is not an original idea, see [influences](#influences). There's a lot of resources out there around tank design and tactics that could be applied to RTanque.
+
+How does it look? Here's a video of a battle: ([No longer available](#to-do))
+
+<a href="http://www.youtube.com/watch?feature=player_embedded&v=UPBqwOgGlVY
+" target="_blank"><img src="http://img.youtube.com/vi/UPBqwOgGlVY/0.jpg" 
+alt="RTanque Demo" width="640" height="480" border="10" /></a>
+
+## Requirements
+
+* Ruby 3.4 or later. May work on earlier versions of Ruby, depeding on other gems used.
+* A [screen](#screen) gem, which is used to display the battle. There are two
+  built in screens, `silent` and `text`, that will allow battles to run but a
+  different screen will allow for a better visualisation.
+
+## Quick Start
+
+1. Make a project directory and initialise bundler with the RTanque gem and (optionally) screen gem;
+
+```bash
+mkdir RTanque
+cd RTanque
+bundle init
+bundle add rtanque --github 'jrmhaig/RTanque' --branch '0.2'
+bundle add rtanque-gosu --github 'jrmhaig/RTanque-gosu'
+bundle exec rtanque init --screen gosu
+```
+
+Create a bot;
+
+```bash
+bundle exec rtanque new_bot my_deadly_bot
+```
+
+Edit your new bot (in `bots/my_deadly_bot`) and then start the battle, against two camper bots;
+
+```bash
+bundle exec rtanque start bots/my_deadly_bot sample_bots/camper:x2
+```
+
 ## Screens
 
 RTanque requires a *screen* to display the battle. There are two screens
@@ -25,7 +77,7 @@ To use a particular screen set the `screen` parameter in the `settings.yml`
 file:
 
 ```yaml
-battle:
+match:
   screen: gosu   # Use `gosu` to display the battle
 ```
 
@@ -59,26 +111,13 @@ module RTanque
 end
 ```
 
-**Old documentation below here**
+## To do
 
-**What is this?**
-RTanque is a game for ( *Ruby* ) programmers. Players program the brain of a tank and then send their tank+brain into battle with other tanks. All tanks are otherwise equal.
+* Fix or remove demo video in the ["What is this?"](#what-is-this) section. The video is no longer available.
+* See if anything can be done with the keyboard bot.
+  It may only work with gosu.
 
-[Getting started guide](https://awilliams.github.io/posts/rtanque-getting-started/)
-
-Rules of the game are simple: Last bot standing wins. Gameplay is also pretty simple. Each tank has a **base**, **turret** and **radar**, each of which rotate independently. The base moves the tank, the turret has a gun mounted to it which can fire at other tanks, and the radar detects other tanks in its field of vision.
-
-Have fun competing against friends' tanks or the sample ones included. Maybe you'll start a small league at your local Ruby meetup. CLI provides easy way to download bots from gists.
-
-Sound difficult or time consuming? It's not! Check out the included sample tank [Seek&Destroy](https://github.com/awilliams/RTanque/blob/master/sample_bots/seek_and_destroy.rb) (which is actually fairly difficult to beat with the keyboard controlled bot). Note that it clocks in at under 50 LOC.
-
-This is not an original idea, see [influences](https://github.com/awilliams/RTanque#influences). There's a lot of resources out there around tank design and tactics that could be applied to RTanque.
-
-How does it look? Here's a video of a battle:
-
-<a href="http://www.youtube.com/watch?feature=player_embedded&v=UPBqwOgGlVY
-" target="_blank"><img src="http://img.youtube.com/vi/UPBqwOgGlVY/0.jpg" 
-alt="RTanque Demo" width="640" height="480" border="10" /></a>
+# Old documentation below here
 
 #### Influences
 RTanque is based on the Java project [Robocode](http://robocode.sourceforge.net/) and inspired by other Ruby ports. Thanks and credit go to them both.
@@ -90,24 +129,6 @@ RTanque is based on the Java project [Robocode](http://robocode.sourceforge.net/
 * [FightCode](http://fightcodegame.com/) - Online javascript tank game
 * [Scalatron](http://scalatron.github.com/) - Scala bot game
 * [Many more...](https://www.google.com/?q=robocode%20clone)
-
-## Requirements
-
- * The [Gosu](https://github.com/jlnr/gosu) library used for rendering has some dependencies. Use the [Gosu getting started](https://github.com/jlnr/gosu/wiki/Getting-Started-on-Linux) to resolve any for your system.
- * Ruby 2.2 or later (also tested on earlier versions)
-
-## Quick Start
-
-Make a project directory, init bundler, add the RTanque gem, and create a bot:
-
-    $ mkdir RTanque; cd RTanque
-    $ bundle init
-    $ echo "gem 'rtanque'" >> Gemfile
-    $ bundle
-    $ bundle exec rtanque new_bot my_deadly_bot
-    $ bundle exec rtanque start bots/my_deadly_bot sample_bots/keyboard sample_bots/camper:x2
-
-*Drive the Keyboard bot with asdf. Aim/fire with the arrow keys*
 
 ## [RTanque Documentation](http://rubydoc.info/github/awilliams/RTanque/master/frames/file/README.md)
 
