@@ -4,7 +4,7 @@ match:
   #   text   : Display the game state at each step in text
   #   gosu   : Graphical display using the Gosu library
   #            Requires the 'rtanque-gosu' gem
-  # screen: silent
+  screen: <%= @screen %>
 
   # Location of bots (default - bots)
   # bot_dir: bots
